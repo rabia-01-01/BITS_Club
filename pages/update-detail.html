@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Details - BITS Pilani Coding Club</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Additional styles for detail page */
+    .detail-content {
+      max-width: 1000px;
+      margin: 120px auto 60px;
+      padding: 0 20px;
+    }
+    
+    .detail-hero {
+      height: 400px;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      box-shadow: var(--box-shadow);
+    }
+    
+    .detail-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .detail-hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 50px 30px 30px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+      color: var(--white);
+    }
+    
+    .detail-title {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+    
+    .detail-date {
+      font-size: 1rem;
+      margin-bottom: 15px;
+      color: var(--accent-gold);
+      display: flex;
+      align-items: center;
+    }
+    
+    .detail-date i {
+      margin-right: 8px;
+    }
+    
+    .detail-description {
+      line-height: 1.8;
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+    }
+    
+    .section-heading {
+      font-size: 1.8rem;
+      color: var(--secondary-blue);
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .section-heading::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-blue), var(--accent-gold));
+    }
+    
+    .related-updates {
+      margin: 40px 0;
+    }
+    
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .related-card {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: transform var(--transition-speed);
+    }
+    
+    .related-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .related-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    
+    .related-card-content {
+      padding: 20px;
+    }
+    
+    .related-card-date {
+      color: var(--accent-gold);
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+    
+    .related-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--secondary-blue);
+    }
+    
+    .cta-section {
+      margin: 40px 0;
+      padding: 40px;
+      background-color: var(--light-gray);
+      border-radius: var(--border-radius);
+      text-align: center;
+    }
+    
+    .cta-heading {
+      font-size: 1.8rem;
+      color: var(--secondary-blue);
+      margin-bottom: 15px;
+    }
+    
+    .cta-text {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 30px;
+      font-weight: 500;
+      color: var(--secondary-blue);
+      transition: color var(--transition-speed);
+    }
+    
+    .back-button i {
+      margin-right: 8px;
+    }
+    
+    .back-button:hover {
+      color: var(--primary-blue);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="../images/coding-club-logo.jpeg" alt="BITS Pilani Coding Club Logo">
+        <h1>Coding Club</h1>
+      </div>
+      <nav>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-menu">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#whats-new" class="active">What's New</a></li>
+          <li><a href="../index.html#recruitment">Recruitment</a></li>
+          <li><a href="../index.html#activities">Activities</a></li>
+          <li><a href="../index.html#people">People</a></li>
+          <li><a href="../index.html#events">Events</a></li>
+          <li><a href="../index.html#gallery">Gallery</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="detail-content">
+    <a href="../index.html#whats-new" class="back-button">
+      <i class="fas fa-arrow-left"></i> Back to Updates
+    </a>
+    
+    <div class="detail-hero">
+      <img src="" id="update-image" alt="Update Image">
+      <div class="detail-hero-overlay">
+        <h1 class="detail-title" id="update-title">Update Title</h1>
+        <div class="detail-date">
+          <i class="far fa-calendar-alt"></i>
+          <span id="update-date">March 15, 2025</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="detail-description" id="update-description">
+      Loading update details...
+    </div>
+    
+    <div class="cta-section">
+      <h2 class="cta-heading">Join Us Today!</h2>
+      <p class="cta-text">Interested in being part of exciting events like this? Join the BITS Pilani Coding Club and take your coding skills to the next level while working on real projects and participating in competitions.</p>
+      <a href="../index.html#recruitment" class="btn btn-primary">Apply Now</a>
+    </div>
+    
+    <div class="related-updates">
+      <h2 class="section-heading">Related Updates</h2>
+      <div class="related-grid" id="related-grid">
+        <!-- Related updates will be loaded dynamically -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="../images/coding-club-logo.jpeg" alt="BITS Pilani Coding Club Logo">
+          <h3>BITS Pilani Coding Club</h3>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#whats-new">What's New</a></li>
+            <li><a href="../index.html#activities">Activities</a></li>
+            <li><a href="../index.html#events">Events</a></li>
+            <li><a href="../index.html#gallery">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact Us</h4>
+          <p><i class="fas fa-map-marker-alt"></i> BITS Pilani, Vidya Vihar, Pilani, Rajasthan 333031</p>
+          <p><i class="fas fa-envelope"></i> codingclub@pilani.bits-pilani.ac.in</p>
+          <p><i class="fas fa-phone"></i> +91 1596 255XXX</p>
+        </div>
+        <div class="footer-social">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 BITS Pilani Coding Club. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Get the update ID from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const updateId = urlParams.get('id');
+    
+    // Mobile menu functionality
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+      document.querySelector('.nav-menu').classList.toggle('active');
+    });
+    
+    // Fetch and display update details
+    document.addEventListener('DOMContentLoaded', function() {
+      // This assumes the updates data is directly embedded in the script.js file
+      // If the data is in a separate file, you'll need to fetch it first
+      
+      // Try to fetch from a dedicated data file first
+      fetch('../js/data/updatesData.js')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('No dedicated updates data file found. Falling back to main script.js');
+          }
+          return response.text();
+        })
+        .then(jsContent => {
+          // Extract the updates array from the JS file
+          const updatesStart = jsContent.indexOf('const updates = [');
+          if (updatesStart === -1) throw new Error('Updates array not found in file');
+          
+          const updatesEnd = jsContent.indexOf('];', updatesStart) + 1;
+          const updatesString = jsContent.substring(
+            jsContent.indexOf('[', updatesStart),
+            updatesEnd
+          );
+          
+          // Convert to JSON and parse
+          const updatesData = JSON.parse(updatesString);
+          const update = updatesData.find(u => u.id === parseInt(updateId));
+          
+          if (update) {
+            displayUpdateDetails(update);
+            fetchRelatedUpdates(update, updatesData);
+          } else {
+            document.getElementById('update-description').textContent = 'Update not found. Please check the URL and try again.';
+          }
+        })
+        .catch(error => {
+          console.error('Error loading from dedicated file:', error);
+          
+          // Fall back to fetching from the main script.js
+          fetch('../script.js')
+            .then(response => response.text())
+            .then(jsContent => {
+              // Extract the updates data array from the JS file
+              const updatesDataStart = jsContent.indexOf('const updatesData = [');
+              if (updatesDataStart === -1) throw new Error('Updates data array not found in script.js');
+              
+              const updatesDataEnd = jsContent.indexOf('];', updatesDataStart) + 1;
+              const updatesDataString = jsContent.substring(
+                jsContent.indexOf('[', updatesDataStart),
+                updatesDataEnd
+              );
+              
+              // Convert to JSON and parse
+              const updatesData = JSON.parse(updatesDataString);
+              const update = updatesData.find(u => u.id === parseInt(updateId));
+              
+              if (update) {
+                displayUpdateDetails(update);
+                fetchRelatedUpdates(update, updatesData);
+              } else {
+                document.getElementById('update-description').textContent = 'Update not found. Please check the URL and try again.';
+              }
+            })
+            .catch(finalError => {
+              console.error('Error loading update data:', finalError);
+              document.getElementById('update-description').textContent = 'Error loading update details. Please try again later.';
+            });
+        });
+    });
+    
+    function displayUpdateDetails(update) {
+      // Update page title
+      document.title = `${update.title} - BITS Pilani Coding Club`;
+      
+      // Set update details
+      document.getElementById('update-image').src = update.image;
+      document.getElementById('update-image').alt = update.title;
+      document.getElementById('update-title').textContent = update.title;
+      document.getElementById('update-date').textContent = update.date;
+      
+      // Set the content (using content or description field depending on data structure)
+      const contentField = update.fullContent || update.content || update.description || update.fullDescription;
+      document.getElementById('update-description').innerHTML = contentField;
+      
+      // If the content is too short, add some default complementary text
+      if (contentField.length < 200) {
+        const additionalInfo = `
+          <p>This update from the BITS Pilani Coding Club marks an important milestone in our activities. 
+          Our club has been actively working to foster a community of coders and technology enthusiasts on campus.</p>
+          
+          <p>Through various initiatives, workshops, and events, we aim to provide students with opportunities 
+          to enhance their technical skills and prepare for industry demands.</p>
+          
+          <p>Stay tuned for more updates on our upcoming events and activities!</p>
+        `;
+        document.getElementById('update-description').innerHTML += additionalInfo;
+      }
+    }
+    
+    function fetchRelatedUpdates(currentUpdate, allUpdates) {
+      const relatedGrid = document.getElementById('related-grid');
+      
+      // Filter out current update and limit to 3 related updates
+      const relatedUpdates = allUpdates
+        .filter(update => update.id !== currentUpdate.id)
+        .slice(0, 3);
+      
+      if (relatedUpdates.length === 0) {
+        document.querySelector('.related-updates').style.display = 'none';
+        return;
+      }
+      
+      relatedGrid.innerHTML = '';
+      
+      relatedUpdates.forEach(update => {
+        const updateCard = document.createElement('div');
+        updateCard.className = 'related-card';
+        updateCard.innerHTML = `
+          <a href="update-detail.html?id=${update.id}" class="card-link">
+            <img src="${update.image}" alt="${update.title}">
+            <div class="related-card-content">
+              <div class="related-card-date">${update.date}</div>
+              <h3>${update.title}</h3>
+              <p>${(update.content || update.description || "").substring(0, 100)}${(update.content || update.description || "").length > 100 ? '...' : ''}</p>
+            </div>
+          </a>
+        `;
+        relatedGrid.appendChild(updateCard);
+      });
+    }
+  </script>
+</body>
+</html>

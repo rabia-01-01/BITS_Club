@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Details - BITS Pilani Coding Club</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Additional styles for detail page */
+    .detail-content {
+      max-width: 1000px;
+      margin: 120px auto 60px;
+      padding: 0 20px;
+    }
+    
+    .detail-hero {
+      height: 400px;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 40px;
+      box-shadow: var(--box-shadow);
+    }
+    
+    .detail-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .detail-hero-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 50px 30px 30px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+      color: var(--white);
+    }
+    
+    .detail-title {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+    
+    .detail-subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: var(--accent-gold);
+    }
+    
+    .project-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 30px;
+    }
+    
+    .project-stat {
+      display: flex;
+      align-items: center;
+      color: var(--white);
+    }
+    
+    .project-stat i {
+      margin-right: 8px;
+      color: var(--accent-gold);
+    }
+    
+    .detail-description {
+      line-height: 1.8;
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+    }
+    
+    .section-heading {
+      font-size: 1.8rem;
+      color: var(--secondary-blue);
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .section-heading::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-blue), var(--accent-gold));
+    }
+    
+    .features-section {
+      margin: 40px 0;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    
+    .feature-card {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      padding: 25px;
+      box-shadow: var(--box-shadow);
+      transition: transform var(--transition-speed);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      color: var(--primary-blue);
+      margin-bottom: 15px;
+    }
+    
+    .feature-title {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--secondary-blue);
+    }
+    
+    .team-section {
+      margin: 40px 0;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 25px;
+    }
+    
+    .team-member {
+      text-align: center;
+    }
+    
+    .team-member-image {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 15px;
+      border: 3px solid var(--primary-blue);
+      box-shadow: var(--box-shadow);
+    }
+    
+    .team-member-name {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+      color: var(--secondary-blue);
+    }
+    
+    .team-member-role {
+      color: var(--dark-gray);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .social-link {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: var(--light-gray);
+      color: var(--secondary-blue);
+      transition: all var(--transition-speed);
+    }
+    
+    .social-link:hover {
+      background-color: var(--primary-blue);
+      color: var(--white);
+    }
+    
+    .tech-section {
+      margin: 40px 0;
+    }
+    
+    .tech-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    
+    .tech-badge {
+      padding: 8px 15px;
+      background-color: var(--light-gray);
+      border-radius: 20px;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      box-shadow: var(--box-shadow-sm);
+    }
+    
+    .tech-badge i {
+      margin-right: 8px;
+      color: var(--primary-blue);
+    }
+    
+    .gallery-section {
+      margin: 40px 0;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--border-radius);
+      height: 220px;
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-speed);
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 30px;
+      font-weight: 500;
+      color: var(--secondary-blue);
+      transition: color var(--transition-speed);
+    }
+    
+    .back-button i {
+      margin-right: 8px;
+    }
+    
+    .back-button:hover {
+      color: var(--primary-blue);
+    }
+    
+    .demo-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .github-btn {
+      background-color: #333;
+      color: var(--white);
+    }
+    
+    .github-btn:hover {
+      background-color: #000;
+    }
+    
+    .demo-btn {
+      background-color: var(--accent-gold);
+      color: var(--dark-blue);
+    }
+    
+    .demo-btn:hover {
+      background-color: var(--primary-blue);
+      color: var(--white);
+    }
+    
+    .progress-section {
+      margin: 40px 0;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background-color: var(--light-gray);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-blue), var(--accent-gold));
+      border-radius: 5px;
+    }
+    
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    
+    .progress-title {
+      color: var(--secondary-blue);
+    }
+    
+    .progress-value {
+      color: var(--accent-gold);
+    }
+    
+    .related-projects {
+      margin: 40px 0;
+    }
+    
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    
+    .related-card {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: transform var(--transition-speed);
+    }
+    
+    .related-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .related-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    
+    .related-card-content {
+      padding: 20px;
+    }
+    
+    .related-card-badge {
+      display: inline-block;
+      padding: 5px 10px;
+      background-color: var(--light-blue);
+      color: var(--secondary-blue);
+      border-radius: 4px;
+      font-size: 0.8rem;
+      margin-bottom: 10px;
+    }
+    
+    .related-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: var(--secondary-blue);
+    }
+    
+    @media (max-width: 768px) {
+      .project-stats {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .features-grid, 
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .demo-buttons {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="../images/coding-club-logo.jpeg" alt="BITS Pilani Coding Club Logo">
+        <h1>Coding Club</h1>
+      </div>
+      <nav>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-menu">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#whats-new">What's New</a></li>
+          <li><a href="../index.html#recruitment">Recruitment</a></li>
+          <li><a href="../index.html#activities" class="active">Activities</a></li>
+          <li><a href="../index.html#people">People</a></li>
+          <li><a href="../index.html#events">Events</a></li>
+          <li><a href="../index.html#gallery">Gallery</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="detail-content">
+    <a href="../index.html#activities" class="back-button">
+      <i class="fas fa-arrow-left"></i> Back to Projects
+    </a>
+    
+    <div class="detail-hero">
+      <img src="" id="project-image" alt="Project Image">
+      <div class="detail-hero-overlay">
+        <h1 class="detail-title" id="project-title">Project Title</h1>
+        <div class="detail-subtitle" id="project-category">Project Category</div>
+        
+        <div class="project-stats">
+          <div class="project-stat">
+            <i class="fas fa-users"></i>
+            <span id="team-size">Team Size: 5 members</span>
+          </div>
+          <div class="project-stat">
+            <i class="fas fa-calendar-alt"></i>
+            <span id="project-duration">Duration: 3 months</span>
+          </div>
+          <div class="project-stat">
+            <i class="fas fa-code-branch"></i>
+            <span id="project-status">Status: Completed</span>
+          </div>
+        </div>
+        
+        <div class="demo-buttons">
+          <a href="#" class="btn github-btn" id="github-link">
+            <i class="fab fa-github"></i> View on GitHub
+          </a>
+          <a href="#" class="btn demo-btn" id="demo-link">
+            <i class="fas fa-external-link-alt"></i> Live Demo
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="detail-description" id="project-description">
+      Loading project details...
+    </div>
+    
+    <div class="features-section">
+      <h2 class="section-heading">Key Features</h2>
+      <div class="features-grid" id="features-grid">
+        <!-- Features will be loaded dynamically -->
+      </div>
+    </div>
+    
+    <div class="tech-section">
+      <h2 class="section-heading">Technologies Used</h2>
+      <div class="tech-grid" id="tech-grid">
+        <!-- Technologies will be loaded dynamically -->
+      </div>
+    </div>
+    
+    <div class="progress-section">
+      <h2 class="section-heading">Project Progress</h2>
+      <div class="progress-container" id="progress-container">
+        <!-- Progress bars will be loaded dynamically -->
+      </div>
+    </div>
+    
+    <div class="team-section">
+      <h2 class="section-heading">Project Team</h2>
+      <div class="team-grid" id="team-grid">
+        <!-- Team members will be loaded dynamically -->
+      </div>
+    </div>
+    
+    <div class="gallery-section">
+      <h2 class="section-heading">Project Gallery</h2>
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Gallery items will be loaded dynamically -->
+      </div>
+    </div>
+    
+    <div class="related-projects">
+      <h2 class="section-heading">Related Projects</h2>
+      <div class="related-grid" id="related-grid">
+        <!-- Related projects will be loaded dynamically -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="../images/coding-club-logo.jpeg" alt="BITS Pilani Coding Club Logo">
+          <h3>BITS Pilani Coding Club</h3>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#whats-new">What's New</a></li>
+            <li><a href="../index.html#activities">Activities</a></li>
+            <li><a href="../index.html#events">Events</a></li>
+            <li><a href="../index.html#gallery">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact Us</h4>
+          <p><i class="fas fa-map-marker-alt"></i> BITS Pilani, Vidya Vihar, Pilani, Rajasthan 333031</p>
+          <p><i class="fas fa-envelope"></i> codingclub@pilani.bits-pilani.ac.in</p>
+          <p><i class="fas fa-phone"></i> +91 1596 255XXX</p>
+        </div>
+        <div class="footer-social">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 BITS Pilani Coding Club. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Get the project ID from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const projectId = urlParams.get('id');
+    
+    // Mobile menu functionality
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+      document.querySelector('.nav-menu').classList.toggle('active');
+    });
+    
+    // Fetch and display project details
+    document.addEventListener('DOMContentLoaded', function() {
+      // Try to fetch from a dedicated data file first
+      fetch('../js/data/projectsData.js')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('No dedicated projects data file found. Falling back to main script.js');
+          }
+          return response.text();
+        })
+        .then(jsContent => {
+          // Extract the projects array from the JS file
+          const projectsStart = jsContent.indexOf('const projects = [');
+          if (projectsStart === -1) throw new Error('Projects array not found in file');
+          
+          const projectsEnd = jsContent.indexOf('];', projectsStart) + 1;
+          const projectsString = jsContent.substring(
+            jsContent.indexOf('[', projectsStart),
+            projectsEnd
+          );
+          
+          // Convert to JSON and parse
+          const projectsData = JSON.parse(projectsString);
+          const project = projectsData.find(p => p.id === parseInt(projectId));
+          
+          if (project) {
+            displayProjectDetails(project);
+            fetchRelatedProjects(project, projectsData);
+          } else {
+            document.getElementById('project-description').textContent = 'Project not found. Please check the URL and try again.';
+          }
+        })
+        .catch(error => {
+          console.error('Error loading from dedicated file:', error);
+          
+          // Fall back to fetching from the main script.js
+          fetch('../script.js')
+            .then(response => response.text())
+            .then(jsContent => {
+              // Extract the projects data array from the JS file
+              const projectsDataStart = jsContent.indexOf('const projectsData = [');
+              if (projectsDataStart === -1) throw new Error('Projects data array not found in script.js');
+              
+              const projectsDataEnd = jsContent.indexOf('];', projectsDataStart) + 1;
+              const projectsDataString = jsContent.substring(
+                jsContent.indexOf('[', projectsDataStart),
+                projectsDataEnd
+              );
+              
+              // Convert to JSON and parse
+              const projectsData = JSON.parse(projectsDataString);
+              const project = projectsData.find(p => p.id === parseInt(projectId));
+              
+              if (project) {
+                displayProjectDetails(project);
+                fetchRelatedProjects(project, projectsData);
+              } else {
+                document.getElementById('project-description').textContent = 'Project not found. Please check the URL and try again.';
+              }
+            })
+            .catch(finalError => {
+              console.error('Error loading project data:', finalError);
+              document.getElementById('project-description').textContent = 'Error loading project details. Please try again later.';
+            });
+        });
+    });
+    
+    function displayProjectDetails(project) {
+      // Update page title
+      document.title = `${project.title} - BITS Pilani Coding Club`;
+      
+      // Set project details
+      document.getElementById('project-image').src = project.image;
+      document.getElementById('project-image').alt = project.title;
+      document.getElementById('project-title').textContent = project.title;
+      document.getElementById('project-category').textContent = project.category;
+      
+      // Set team size, duration, and status if available
+      if (project.teamSize) document.getElementById('team-size').textContent = `Team Size: ${project.teamSize} members`;
+      if (project.duration) document.getElementById('project-duration').textContent = `Duration: ${project.duration}`;
+      if (project.status) document.getElementById('project-status').textContent = `Status: ${project.status}`;
+      
+      // Set GitHub and demo links if available
+      const githubLink = document.getElementById('github-link');
+      const demoLink = document.getElementById('demo-link');
+      
+      if (project.githubUrl) {
+        githubLink.href = project.githubUrl;
+      } else {
+        githubLink.style.display = 'none';
+      }
+      
+      if (project.demoUrl) {
+        demoLink.href = project.demoUrl;
+      } else {
+        demoLink.style.display = 'none';
+      }
+      
+      // If both links are not available, hide the buttons container
+      if (!project.githubUrl && !project.demoUrl) {
+        document.querySelector('.demo-buttons').style.display = 'none';
+      }
+      
+      // Set the description
+      const descriptionField = project.fullDescription || project.description;
+      document.getElementById('project-description').innerHTML = descriptionField;
+      
+      // If the project has features, display them
+      if (project.features && project.features.length > 0) {
+        const featuresGrid = document.getElementById('features-grid');
+        featuresGrid.innerHTML = '';
+        
+        project.features.forEach(feature => {
+          featuresGrid.innerHTML += `
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="${feature.icon || 'fas fa-check-circle'}"></i>
+              </div>
+              <h3 class="feature-title">${feature.title}</h3>
+              <p>${feature.description}</p>
+            </div>
+          `;
+        });
+      } else {
+        // If no features are provided, generate some default ones
+        const defaultFeatures = [
+          {
+            title: "User-Friendly Interface",
+            description: "Intuitive and easy-to-navigate interface designed for optimal user experience.",
+            icon: "fas fa-user-friends"
+          },
+          {
+            title: "Advanced Analytics",
+            description: "Comprehensive data analysis capabilities to make informed decisions.",
+            icon: "fas fa-chart-line"
+          },
+          {
+            title: "Secure Authentication",
+            description: "Robust security measures to protect user data and privacy.",
+            icon: "fas fa-shield-alt"
+          },
+          {
+            title: "Responsive Design",
+            description: "Fully responsive layout that works seamlessly across all devices.",
+            icon: "fas fa-mobile-alt"
+          }
+        ];
+        
+        const featuresGrid = document.getElementById('features-grid');
+        featuresGrid.innerHTML = '';
+        
+        defaultFeatures.forEach(feature => {
+          featuresGrid.innerHTML += `
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="${feature.icon}"></i>
+              </div>
+              <h3 class="feature-title">${feature.title}</h3>
+              <p>${feature.description}</p>
+            </div>
+          `;
+        });
+      }
+      
+      // If the project has technologies, display them
+      if (project.technologies && project.technologies.length > 0) {
+        const techGrid = document.getElementById('tech-grid');
+        techGrid.innerHTML = '';
+        
+        project.technologies.forEach(tech => {
+          const iconClass = getTechIcon(tech);
+          techGrid.innerHTML += `
+            <div class="tech-badge">
+              <i class="${iconClass}"></i> ${tech}
+            </div>
+          `;
+        });
+      } else {
+        // If no technologies are provided, generate some default ones based on the category
+        const defaultTechs = getDefaultTechnologies(project.category);
+        
+        const techGrid = document.getElementById('tech-grid');
+        techGrid.innerHTML = '';
+        
+        defaultTechs.forEach(tech => {
+          const iconClass = getTechIcon(tech);
+          techGrid.innerHTML += `
+            <div class="tech-badge">
+              <i class="${iconClass}"></i> ${tech}
+            </div>
+          `;
+        });
+      }
+      
+      // If the project has progress data, display it
+      if (project.progress && project.progress.length > 0) {
+        const progressContainer = document.getElementById('progress-container');
+        progressContainer.innerHTML = '';
+        
+        project.progress.forEach(item => {
+          progressContainer.innerHTML += `
+            <div class="progress-info">
+              <div class="progress-title">${item.title}</div>
+              <div class="progress-value">${item.value}%</div>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${item.value}%"></div>
+            </div>
+          `;
+        });
+      } else {
+        // If no progress data is provided, generate a default one
+        const progressContainer = document.getElementById('progress-container');
+        progressContainer.innerHTML = `
+          <div class="progress-info">
+            <div class="progress-title">Overall Completion</div>
+            <div class="progress-value">85%</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 85%"></div>
+          </div>
+          <div class="progress-info">
+            <div class="progress-title">Frontend Development</div>
+            <div class="progress-value">95%</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 95%"></div>
+          </div>
+          <div class="progress-info">
+            <div class="progress-title">Backend Development</div>
+            <div class="progress-value">80%</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 80%"></div>
+          </div>
+          <div class="progress-info">
+            <div class="progress-title">Testing & Documentation</div>
+            <div class="progress-value">70%</div>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 70%"></div>
+          </div>
+        `;
+      }
+      
+      // If the project has team members, display them
+      if (project.team && project.team.length > 0) {
+        const teamGrid = document.getElementById('team-grid');
+        teamGrid.innerHTML = '';
+        
+        project.team.forEach(member => {
+          let socialLinks = '';
+          if (member.social) {
+            socialLinks = '<div class="social-links">';
+            if (member.social.github) socialLinks += `<a href="${member.social.github}" class="social-link"><i class="fab fa-github"></i></a>`;
+            if (member.social.linkedin) socialLinks += `<a href="${member.social.linkedin}" class="social-link"><i class="fab fa-linkedin-in"></i></a>`;
+            if (member.social.twitter) socialLinks += `<a href="${member.social.twitter}" class="social-link"><i class="fab fa-twitter"></i></a>`;
+            socialLinks += '</div>';
+          }
+          
+          teamGrid.innerHTML += `
+            <div class="team-member">
+              <img src="${member.image}" alt="${member.name}" class="team-member-image">
+              <h3 class="team-member-name">${member.name}</h3>
+              <div class="team-member-role">${member.role}</div>
+              ${socialLinks}
+            </div>
+          `;
+        });
+      } else {
+        // If no team members are provided, hide the team section
+        document.querySelector('.team-section').style.display = 'none';
+      }
+      
+      // If the project has gallery images, display them
+      if (project.gallery && project.gallery.length > 0) {
+        const galleryGrid = document.getElementById('gallery-grid');
+        galleryGrid.innerHTML = '';
+        
+        project.gallery.forEach(item => {
+          galleryGrid.innerHTML += `
+            <div class="gallery-item">
+              <img src="${item.image}" alt="${item.caption || 'Project Gallery Image'}">
+            </div>
+          `;
+        });
+      } else {
+        // If no gallery images are provided, hide the gallery section
+        document.querySelector('.gallery-section').style.display = 'none';
+      }
+    }
+    
+    function fetchRelatedProjects(currentProject, allProjects) {
+      const relatedGrid = document.getElementById('related-grid');
+      
+      // Filter projects by the same category and exclude the current project
+      const relatedProjects = allProjects
+        .filter(project => project.category === currentProject.category && project.id !== currentProject.id)
+        .slice(0, 3);
+      
+      // If not enough projects in the same category, add some from other categories
+      if (relatedProjects.length < 3) {
+        const otherProjects = allProjects
+          .filter(project => project.category !== currentProject.category && project.id !== currentProject.id)
+          .slice(0, 3 - relatedProjects.length);
+        
+        relatedProjects.push(...otherProjects);
+      }
+      
+      if (relatedProjects.length === 0) {
+        document.querySelector('.related-projects').style.display = 'none';
+        return;
+      }
+      
+      relatedGrid.innerHTML = '';
+      
+      relatedProjects.forEach(project => {
+        const projectCard = document.createElement('div');
+        projectCard.className = 'related-card';
+        projectCard.innerHTML = `
+          <a href="project-detail.html?id=${project.id}" class="card-link">
+            <img src="${project.image}" alt="${project.title}">
+            <div class="related-card-content">
+              <span class="related-card-badge">${project.category}</span>
+              <h3>${project.title}</h3>
+              <p>${project.description.substring(0, 100)}${project.description.length > 100 ? '...' : ''}</p>
+            </div>
+          </a>
+        `;
+        relatedGrid.appendChild(projectCard);
+      });
+    }
+    
+    function getTechIcon(tech) {
+      // Helper function to get the appropriate icon class for common technologies
+      const techIcons = {
+        'JavaScript': 'fab fa-js',
+        'TypeScript': 'fab fa-js',
+        'Python': 'fab fa-python',
+        'Java': 'fab fa-java',
+        'React': 'fab fa-react',
+        'Angular': 'fab fa-angular',
+        'Vue': 'fab fa-vuejs',
+        'Node.js': 'fab fa-node-js',
+        'Express': 'fab fa-node-js',
+        'Django': 'fab fa-python',
+        'Flask': 'fab fa-python',
+        'PHP': 'fab fa-php',
+        'Laravel': 'fab fa-laravel',
+        'HTML': 'fab fa-html5',
+        'CSS': 'fab fa-css3-alt',
+        'SASS': 'fab fa-sass',
+        'Bootstrap': 'fab fa-bootstrap',
+        'Tailwind': 'fab fa-css3-alt',
+        'MongoDB': 'fas fa-database',
+        'MySQL': 'fas fa-database',
+        'PostgreSQL': 'fas fa-database',
+        'Redis': 'fas fa-database',
+        'Firebase': 'fas fa-fire',
+        'AWS': 'fab fa-aws',
+        'Docker': 'fab fa-docker',
+        'Kubernetes': 'fas fa-dharmachakra',
+        'Git': 'fab fa-git-alt',
+        'GitHub': 'fab fa-github',
+        'GitLab': 'fab fa-gitlab',
+        'Linux': 'fab fa-linux',
+        'Windows': 'fab fa-windows',
+        'MacOS': 'fab fa-apple',
+        'Android': 'fab fa-android',
+        'iOS': 'fab fa-apple',
+        'Swift': 'fab fa-swift',
+        'Kotlin': 'fab fa-android',
+        'C#': 'fab fa-microsoft',
+        'C++': 'fas fa-code',
+        'C': 'fas fa-code',
+        'Ruby': 'fas fa-gem',
+        'Rails': 'fas fa-gem'
+      };
+      
+      return techIcons[tech] || 'fas fa-code';
+    }
+    
+    function getDefaultTechnologies(category) {
+      // Helper function to suggest technologies based on project category
+      const categoryTechs = {
+        'Web Development': ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js', 'MongoDB'],
+        'Mobile': ['React Native', 'Flutter', 'Android', 'iOS', 'Firebase'],
+        'AI/ML': ['Python', 'TensorFlow', 'PyTorch', 'Scikit-learn', 'Jupyter'],
+        'IoT': ['Arduino', 'Raspberry Pi', 'C++', 'MQTT', 'Python'],
+        'Blockchain': ['Ethereum', 'Solidity', 'Web3.js', 'Smart Contracts', 'React'],
+        'Data Science': ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Jupyter'],
+        'Game Development': ['Unity', 'C#', 'Blender', 'JavaScript', 'WebGL'],
+        'DevOps': ['Docker', 'Kubernetes', 'AWS', 'CI/CD', 'Jenkins'],
+        'Cybersecurity': ['Python', 'Kali Linux', 'Wireshark', 'Metasploit', 'Nmap']
+      };
+      
+      return categoryTechs[category] || ['HTML', 'CSS', 'JavaScript', 'Python', 'Git'];
+    }
+  </script>
+</body>
+</html>

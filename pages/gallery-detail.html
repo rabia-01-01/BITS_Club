@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery Image - BITS Pilani Coding Club</title>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Additional styles for gallery detail page */
+    .detail-content {
+      max-width: 1000px;
+      margin: 120px auto 60px;
+      padding: 0 20px;
+    }
+    
+    .gallery-detail-container {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    
+    .main-image-container {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      background-color: #000;
+      height: 500px;
+    }
+    
+    .main-image {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    
+    .image-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+      color: var(--white);
+    }
+    
+    .image-title {
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+    
+    .image-description {
+      line-height: 1.6;
+    }
+    
+    .controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    
+    .control-button {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      border: none;
+      background-color: var(--primary-blue);
+      color: var(--white);
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color var(--transition-speed);
+    }
+    
+    .control-button:hover {
+      background-color: var(--secondary-blue);
+    }
+    
+    .control-button i {
+      margin-right: 8px;
+    }
+    
+    .control-button.next i {
+      margin-right: 0;
+      margin-left: 8px;
+    }
+    
+    .gallery-info {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+    
+    .info-column {
+      flex: 1;
+    }
+    
+    .info-title {
+      font-size: 1.5rem;
+      color: var(--secondary-blue);
+      margin-bottom: 15px;
+      border-bottom: 2px solid var(--accent-gold);
+      padding-bottom: 10px;
+    }
+    
+    .info-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .info-list li {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: var(--light-gray);
+      border-radius: var(--border-radius);
+    }
+    
+    .info-list li i {
+      margin-right: 10px;
+      color: var(--primary-blue);
+      width: 20px;
+      text-align: center;
+    }
+    
+    .related-images {
+      margin-top: 40px;
+    }
+    
+    .section-heading {
+      font-size: 1.8rem;
+      color: var(--secondary-blue);
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .section-heading::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-blue), var(--accent-gold));
+    }
+    
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    
+    .related-item {
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+      transition: transform var(--transition-speed);
+      cursor: pointer;
+      height: 150px;
+    }
+    
+    .related-item:hover {
+      transform: translateY(-5px);
+    }
+    
+    .related-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .fullscreen-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    
+    .fullscreen-container.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    
+    .fullscreen-image {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+    
+    .fullscreen-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: var(--white);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 30px;
+      font-weight: 500;
+      color: var(--secondary-blue);
+      transition: color var(--transition-speed);
+    }
+    
+    .back-button i {
+      margin-right: 8px;
+    }
+    
+    .back-button:hover {
+      color: var(--primary-blue);
+    }
+    
+    @media (max-width: 768px) {
+      .gallery-info {
+        flex-direction: column;
+      }
+      
+      .controls {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="../images/coding-club-logo.jpeg" alt="BITS Pilani Coding Club Logo">
+        <h1>Coding Club</h1>
+      </div>
+      <nav>
+        <button class="mobile-menu-btn">
+          <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-menu">
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#whats-new">What's New</a></li>
+          <li><a href="../index.html#recruitment">Recruitment</a></li>
+          <li><a href="../index.html#activities">Activities</a></li>
+          <li><a href="../index.html#people">People</a></li>
+          <li><a href="../index.html#events">Events</a></li>
+          <li><a href="../index.html#gallery" class="active">Gallery</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="detail-content">
+    <a href="../index.html#gallery" class="back-button">
+      <i class="fas fa-arrow-left"></i> Back to Gallery
+    </a>
+    
+    <div class="gallery-detail-container">
+      <div class="main-image-container">
+        <img src="" id="main-image" class="main-image" alt="Gallery Image">
+        <div class="image-caption">
+          <h1 class="image-title" id="image-title">Image Title</h1>
+          <div class="image-description" id="image-description">Image description will appear here.</div>
+        </div>
+      </div>
+      
+      <div class="controls">
+        <button class="control-button prev" id="prev-button">
+          <i class="fas fa-chevron-left"></i> Previous Image
+        </button>
+        <button class="control-button" id="fullscreen-button">
+          <i class="fas fa-expand"></i> Fullscreen
+        </button>
+        <button class="control-button next" id="next-button">
+          Next Image <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      
+      <div class="gallery-info">
+        <div class="info-column">
+          <h2 class="info-title">Image Details</h2>
+          <ul class="info-list">
+            <li><i class="fas fa-calendar-alt"></i> <span id="image-date">Date: March 15, 2025</span></li>
+            <li><i class="fas fa-map-marker-alt"></i> <span id="image-location">Location: BITS Pilani Campus</span></li>
+            <li><i class="fas fa-camera"></i> <span id="image-photographer">Photographer: Photography Club</span></li>
+            <li><i class="fas fa-tag"></i> <span id="image-event">Event: CodeFest 2025</span></li>
+          </ul>
+        </div>
+        <div class="info-column">
+          <h2 class="info-title">Related Information</h2>
+          <ul class="info-list">
+            <li><i class="fas fa-users"></i> <span id="image-participants">Participants: Coding Club Members</span></li>
+            <li><i class="fas fa-award"></i> <span id="image-achievements">Achievements: First Place in Hackathon</span></li>
+            <li><i class="fas fa-link"></i> <a href="#" id="image-related-link">Related Event</a></li>
+            <li><i class="fas fa-share-alt"></i> <a href="#" id="image-share">Share this image</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="related-images">
+        <h2 class="section-heading">More from this Event</h2>
+        <div class="related-grid" id="related-grid">
+          <!-- Related images will be loaded dynamically -->
+        </div>
+      </div>
+    </div>
+    
+    <!-- Fullscreen Image Container -->
+    <div class="fullscreen-container" id="fullscreen-container">
+      <i class="fas fa-times fullscreen-close" id="fullscreen-close"></i>
+      <img src="" id="fullscreen-image" class="fullscreen-image" alt="Fullscreen Gallery Image">
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="../images/coding-club-logo.jpeg" alt="BITS Pilani Coding Club Logo">
+          <h3>BITS Pilani Coding Club</h3>
+        </div>
+        <div class="footer-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#whats-new">What's New</a></li>
+            <li><a href="../index.html#activities">Activities</a></li>
+            <li><a href="../index.html#events">Events</a></li>
+            <li><a href="../index.html#gallery">Gallery</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Contact Us</h4>
+          <p><i class="fas fa-map-marker-alt"></i> BITS Pilani, Vidya Vihar, Pilani, Rajasthan 333031</p>
+          <p><i class="fas fa-envelope"></i> codingclub@pilani.bits-pilani.ac.in</p>
+          <p><i class="fas fa-phone"></i> +91 1596 255XXX</p>
+        </div>
+        <div class="footer-social">
+          <h4>Follow Us</h4>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 BITS Pilani Coding Club. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Get the image ID from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const imageId = urlParams.get('id');
+    
+    // Mobile menu functionality
+    document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+      document.querySelector('.nav-menu').classList.toggle('active');
+    });
+    
+    // Fullscreen functionality
+    const fullscreenButton = document.getElementById('fullscreen-button');
+    const fullscreenContainer = document.getElementById('fullscreen-container');
+    const fullscreenImage = document.getElementById('fullscreen-image');
+    const fullscreenClose = document.getElementById('fullscreen-close');
+    
+    fullscreenButton.addEventListener('click', function() {
+      const mainImage = document.getElementById('main-image');
+      fullscreenImage.src = mainImage.src;
+      fullscreenContainer.classList.add('active');
+      
+      // Prevent scrolling while fullscreen is active
+      document.body.style.overflow = 'hidden';
+    });
+    
+    fullscreenClose.addEventListener('click', function() {
+      fullscreenContainer.classList.remove('active');
+      
+      // Re-enable scrolling
+      document.body.style.overflow = 'auto';
+    });
+    
+    // Close fullscreen on escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && fullscreenContainer.classList.contains('active')) {
+        fullscreenContainer.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    });
+    
+    // Fetch and display gallery image details
+    document.addEventListener('DOMContentLoaded', function() {
+      // Try to fetch from a dedicated data file first
+      fetch('../js/data/galleryData.js')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('No dedicated gallery data file found. Falling back to main script.js');
+          }
+          return response.text();
+        })
+        .then(jsContent => {
+          // Extract the gallery images array from the JS file
+          const galleryStart = jsContent.indexOf('const galleryImages = [');
+          if (galleryStart === -1) throw new Error('Gallery images array not found in file');
+          
+          const galleryEnd = jsContent.indexOf('];', galleryStart) + 1;
+          const galleryString = jsContent.substring(
+            jsContent.indexOf('[', galleryStart),
+            galleryEnd
+          );
+          
+          // Convert to JSON and parse
+          const galleryData = JSON.parse(galleryString);
+          const currentIndex = galleryData.findIndex(img => img.id === parseInt(imageId));
+          
+          if (currentIndex !== -1) {
+            displayImageDetails(galleryData[currentIndex]);
+            setupNavigationButtons(galleryData, currentIndex);
+            displayRelatedImages(galleryData, currentIndex);
+          } else {
+            document.getElementById('image-description').textContent = 'Image not found. Please check the URL and try again.';
+          }
+        })
+        .catch(error => {
+          console.error('Error loading from dedicated file:', error);
+          
+          // Fall back to fetching from the main script.js
+          fetch('../script.js')
+            .then(response => response.text())
+            .then(jsContent => {
+              // Extract the gallery images data array from the JS file
+              const galleryDataStart = jsContent.indexOf('const galleryImagesData = [');
+              if (galleryDataStart === -1) throw new Error('Gallery images data array not found in script.js');
+              
+              const galleryDataEnd = jsContent.indexOf('];', galleryDataStart) + 1;
+              const galleryDataString = jsContent.substring(
+                jsContent.indexOf('[', galleryDataStart),
+                galleryDataEnd
+              );
+              
+              // Convert to JSON and parse
+              const galleryData = JSON.parse(galleryDataString);
+              const currentIndex = galleryData.findIndex(img => img.id === parseInt(imageId));
+              
+              if (currentIndex !== -1) {
+                displayImageDetails(galleryData[currentIndex]);
+                setupNavigationButtons(galleryData, currentIndex);
+                displayRelatedImages(galleryData, currentIndex);
+              } else {
+                document.getElementById('image-description').textContent = 'Image not found. Please check the URL and try again.';
+              }
+            })
+            .catch(finalError => {
+              console.error('Error loading gallery data:', finalError);
+              document.getElementById('image-description').textContent = 'Error loading image details. Please try again later.';
+            });
+        });
+    });
+    
+    function displayImageDetails(image) {
+      // Update page title
+      document.title = `${image.title} - BITS Pilani Coding Club Gallery`;
+      
+      // Set image details
+      document.getElementById('main-image').src = image.image;
+      document.getElementById('main-image').alt = image.title;
+      document.getElementById('image-title').textContent = image.title;
+      
+      // Set description if available
+      if (image.description) {
+        document.getElementById('image-description').textContent = image.description;
+      } else {
+        document.getElementById('image-description').textContent = `Image from ${image.title} event at BITS Pilani Coding Club.`;
+      }
+      
+      // Set additional details if available
+      if (image.date) document.getElementById('image-date').textContent = `Date: ${image.date}`;
+      if (image.location) document.getElementById('image-location').textContent = `Location: ${image.location}`;
+      if (image.photographer) document.getElementById('image-photographer').textContent = `Photographer: ${image.photographer}`;
+      if (image.event) document.getElementById('image-event').textContent = `Event: ${image.event}`;
+      
+      if (image.participants) document.getElementById('image-participants').textContent = `Participants: ${image.participants}`;
+      if (image.achievements) document.getElementById('image-achievements').textContent = `Achievements: ${image.achievements}`;
+      
+      // Set related link if available
+      const relatedLink = document.getElementById('image-related-link');
+      if (image.relatedEventId) {
+        relatedLink.href = `event-detail.html?id=${image.relatedEventId}`;
+        relatedLink.textContent = "View Related Event";
+      } else {
+        relatedLink.parentElement.style.display = 'none';
+      }
+      
+      // Setup share functionality
+      document.getElementById('image-share').addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        if (navigator.share) {
+          navigator.share({
+            title: image.title,
+            text: image.description || `Check out this image from BITS Pilani Coding Club!`,
+            url: window.location.href
+          })
+          .catch(error => console.error('Error sharing:', error));
+        } else {
+          // Fallback: copy URL to clipboard
+          const dummyInput = document.createElement('input');
+          document.body.appendChild(dummyInput);
+          dummyInput.value = window.location.href;
+          dummyInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(dummyInput);
+          
+          alert('URL copied to clipboard!');
+        }
+      });
+    }
+    
+    function setupNavigationButtons(galleryData, currentIndex) {
+      const prevButton = document.getElementById('prev-button');
+      const nextButton = document.getElementById('next-button');
+      
+      // Setup previous button
+      if (currentIndex > 0) {
+        prevButton.addEventListener('click', function() {
+          window.location.href = `gallery-detail.html?id=${galleryData[currentIndex - 1].id}`;
+        });
+      } else {
+        prevButton.disabled = true;
+        prevButton.style.opacity = 0.5;
+        prevButton.style.cursor = 'not-allowed';
+      }
+      
+      // Setup next button
+      if (currentIndex < galleryData.length - 1) {
+        nextButton.addEventListener('click', function() {
+          window.location.href = `gallery-detail.html?id=${galleryData[currentIndex + 1].id}`;
+        });
+      } else {
+        nextButton.disabled = true;
+        nextButton.style.opacity = 0.5;
+        nextButton.style.cursor = 'not-allowed';
+      }
+    }
+    
+    function displayRelatedImages(galleryData, currentIndex) {
+      const relatedGrid = document.getElementById('related-grid');
+      
+      // Show up to 6 related images, but not the current one
+      const relatedImages = galleryData
+        .filter((_, index) => index !== currentIndex)
+        .slice(0, 6);
+      
+      if (relatedImages.length === 0) {
+        document.querySelector('.related-images').style.display = 'none';
+        return;
+      }
+      
+      relatedGrid.innerHTML = '';
+      
+      relatedImages.forEach(image => {
+        const relatedItem = document.createElement('div');
+        relatedItem.className = 'related-item';
+        relatedItem.innerHTML = `<img src="${image.image}" alt="${image.title}">`;
+        
+        relatedItem.addEventListener('click', function() {
+          window.location.href = `gallery-detail.html?id=${image.id}`;
+        });
+        
+        relatedGrid.appendChild(relatedItem);
+      });
+    }
+  </script>
+</body>
+</html>

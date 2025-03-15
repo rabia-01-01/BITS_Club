@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contest Winner Details - BITS Pilani Coding Club</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Additional styles for detail page */
+      .detail-content {
+        max-width: 1000px;
+        margin: 120px auto 60px;
+        padding: 0 20px;
+      }
+
+      .detail-hero {
+        height: 400px;
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 40px;
+        box-shadow: var(--box-shadow);
+      }
+
+      .detail-hero img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .detail-hero-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 50px 30px 30px;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        color: var(--white);
+      }
+
+      .detail-title {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        color: var(--white);
+      }
+
+      .detail-subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: var(--white);
+      }
+
+      .detail-meta {
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .detail-rank,
+      .detail-date {
+        display: flex;
+        align-items: center;
+        color: var(--accent-gold);
+        font-size: 0.9rem;
+        font-weight: bold;
+      }
+
+      .detail-rank i,
+      .detail-date i {
+        margin-right: 8px;
+      }
+
+      .detail-description {
+        line-height: 1.8;
+        margin-bottom: 40px;
+        font-size: 1.1rem;
+      }
+
+      .team-section {
+        margin: 30px 0;
+        padding: 25px;
+        background-color: var(--light-gray);
+        border-radius: var(--border-radius);
+      }
+
+      .team-title {
+        font-size: 1.4rem;
+        color: var(--secondary-blue);
+        margin-bottom: 20px;
+      }
+
+      .team-members {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .team-member {
+        background-color: var(--white);
+        border-radius: 50px;
+        padding: 8px 15px;
+        font-weight: 500;
+        font-size: 0.9rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .section-heading {
+        font-size: 1.8rem;
+        color: var(--secondary-blue);
+        margin-bottom: 20px;
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .section-heading::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--primary-blue),
+          var(--accent-gold)
+        );
+      }
+
+      .achievements-section {
+        margin: 40px 0;
+      }
+
+      .achievements-list {
+        padding-left: 20px;
+      }
+
+      .achievements-list li {
+        margin-bottom: 15px;
+        position: relative;
+        padding-left: 30px;
+        font-size: 1.1rem;
+      }
+
+      .achievements-list li i {
+        color: var(--accent-gold);
+        position: absolute;
+        left: 0;
+        top: 5px;
+      }
+
+      .testimonial-section {
+        margin: 40px 0;
+        padding: 30px;
+        background-color: var(--light-gray);
+        border-radius: var(--border-radius);
+        position: relative;
+      }
+
+      .testimonial-quote {
+        font-size: 1.1rem;
+        font-style: italic;
+        line-height: 1.6;
+        margin-bottom: 15px;
+      }
+
+      .testimonial-quote::before {
+        content: '"';
+        font-size: 3rem;
+        color: var(--transparent-blue);
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-family: Georgia, serif;
+        line-height: 1;
+      }
+
+      .testimonial-author {
+        font-weight: 600;
+        color: var(--secondary-blue);
+      }
+
+      .media-section {
+        margin: 40px 0;
+      }
+
+      .media-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
+
+      .media-item {
+        position: relative;
+        border-radius: var(--border-radius);
+        overflow: hidden;
+        height: 250px;
+      }
+
+      .media-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform var(--transition-speed);
+      }
+
+      .media-item:hover img {
+        transform: scale(1.05);
+      }
+
+      .media-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 15px;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        color: var(--white);
+        font-size: 0.9rem;
+      }
+
+      .back-button {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 30px;
+        font-weight: 500;
+        color: var(--secondary-blue);
+        transition: color var(--transition-speed);
+      }
+
+      .back-button i {
+        margin-right: 8px;
+      }
+
+      .back-button:hover {
+        color: var(--primary-blue);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header>
+      <div class="container">
+        <div class="logo">
+          <img
+            src="../images/coding-club-logo.jpeg"
+            alt="BITS Pilani Coding Club Logo"
+          />
+          <h1>Coding Club</h1>
+        </div>
+        <nav>
+          <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+          </button>
+          <ul class="nav-menu">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../index.html#whats-new">What's New</a></li>
+            <li><a href="../index.html#recruitment">Recruitment</a></li>
+            <li><a href="../index.html#activities">Activities</a></li>
+            <li><a href="../index.html#people">People</a></li>
+            <li><a href="../index.html#events" class="active">Events</a></li>
+            <li><a href="../index.html#gallery">Gallery</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="detail-content">
+      <a href="../index.html#events" class="back-button">
+        <i class="fas fa-arrow-left"></i> Back to Contest Winners
+      </a>
+
+      <div class="detail-hero">
+        <img src="" id="contest-image" alt="Contest Image" />
+        <div class="detail-hero-overlay">
+          <h1 class="detail-title" id="contest-title">Contest Title</h1>
+          <h2 class="detail-subtitle">
+            Winner: <span id="contest-winner">Team Name</span>
+          </h2>
+          <div class="detail-meta">
+            <div class="detail-rank">
+              <i class="fas fa-trophy"></i>
+              <span id="contest-rank">Global Rank: 1</span>
+            </div>
+            <div class="detail-date">
+              <i class="far fa-calendar-alt"></i>
+              <span id="contest-date">March 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-section">
+        <h3 class="team-title">Team Members</h3>
+        <div class="team-members" id="team-members">
+          <!-- Team members will be loaded dynamically -->
+        </div>
+      </div>
+
+      <div class="detail-description" id="contest-description">
+        Loading contest details...
+      </div>
+
+      <div class="achievements-section">
+        <h2 class="section-heading">Key Achievements</h2>
+        <ul class="achievements-list" id="achievements-list">
+          <!-- Achievements will be loaded dynamically -->
+        </ul>
+      </div>
+
+      <div class="testimonial-section">
+        <div class="testimonial-quote" id="testimonial-quote">
+          Loading testimonial...
+        </div>
+        <div class="testimonial-author" id="testimonial-author">
+          - Team Member
+        </div>
+      </div>
+
+      <div class="media-section">
+        <h2 class="section-heading">Media Gallery</h2>
+        <div class="media-grid" id="media-grid">
+          <!-- Media items will be loaded dynamically -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-logo">
+            <img
+              src="../images/coding-club-logo.jpeg"
+              alt="BITS Pilani Coding Club Logo"
+            />
+            <h3>BITS Pilani Coding Club</h3>
+          </div>
+          <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="../index.html#whats-new">What's New</a></li>
+              <li><a href="../index.html#activities">Activities</a></li>
+              <li><a href="../index.html#events">Events</a></li>
+              <li><a href="../index.html#gallery">Gallery</a></li>
+            </ul>
+          </div>
+          <div class="footer-contact">
+            <h4>Contact Us</h4>
+            <p>
+              <i class="fas fa-map-marker-alt"></i> BITS Pilani, Vidya Vihar,
+              Pilani, Rajasthan 333031
+            </p>
+            <p>
+              <i class="fas fa-envelope"></i>
+              codingclub@pilani.bits-pilani.ac.in
+            </p>
+            <p><i class="fas fa-phone"></i> +91 1596 255XXX</p>
+          </div>
+          <div class="footer-social">
+            <h4>Follow Us</h4>
+            <div class="social-icons">
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 BITS Pilani Coding Club. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Get the contest ID from the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const contestId = urlParams.get("id");
+
+      // Mobile menu functionality
+      document
+        .querySelector(".mobile-menu-btn")
+        .addEventListener("click", function () {
+          document.querySelector(".nav-menu").classList.toggle("active");
+        });
+
+      // Fetch and display contest details
+      document.addEventListener("DOMContentLoaded", function () {
+        // Fetch contest winners data
+        fetch("../js/data/eventsData.js")
+          .then((response) => response.text())
+          .then((jsContent) => {
+            // Extract the contest winners array from the JS file
+            const winnersStart = jsContent.indexOf("const contestWinners = [");
+            const winnersEnd = jsContent.indexOf("];", winnersStart) + 1;
+            const winnersString = jsContent.substring(
+              jsContent.indexOf("[", winnersStart),
+              winnersEnd,
+            );
+
+            // Convert to JSON and parse
+            const winnersData = JSON.parse(winnersString);
+            const contest = winnersData.find(
+              (c) => c.id === parseInt(contestId),
+            );
+
+            if (contest) {
+              displayContestDetails(contest);
+            } else {
+              document.getElementById("contest-description").textContent =
+                "Contest not found. Please check the URL and try again.";
+            }
+          })
+          .catch((error) => {
+            console.error("Error loading contest data:", error);
+            document.getElementById("contest-description").textContent =
+              "Error loading contest details. Please try again later.";
+          });
+      });
+
+      function displayContestDetails(contest) {
+        // Update page title
+        document.title = `${contest.title} - BITS Pilani Coding Club`;
+
+        // Set contest details
+        document.getElementById("contest-image").src = contest.image;
+        document.getElementById("contest-title").textContent = contest.title;
+        document.getElementById("contest-winner").textContent = contest.winner;
+        document.getElementById("contest-rank").textContent = contest.rank;
+        document.getElementById("contest-date").textContent = contest.date;
+        document.getElementById("contest-description").innerHTML =
+          contest.fullDescription || contest.description;
+
+        // Display team members
+        const teamContainer = document.getElementById("team-members");
+        if (contest.members && contest.members.length > 0) {
+          teamContainer.innerHTML = "";
+          contest.members.forEach((member) => {
+            teamContainer.innerHTML += `<div class="team-member">${member}</div>`;
+          });
+        } else {
+          document.querySelector(".team-section").style.display = "none";
+        }
+
+        // Display achievements
+        const achievementsList = document.getElementById("achievements-list");
+        if (contest.achievements && contest.achievements.length > 0) {
+          achievementsList.innerHTML = "";
+          contest.achievements.forEach((achievement) => {
+            achievementsList.innerHTML += `
+            <li><i class="fas fa-award"></i> ${achievement}</li>
+          `;
+          });
+        } else {
+          document.querySelector(".achievements-section").style.display =
+            "none";
+        }
+
+        // Display testimonial
+        if (contest.testimonial) {
+          document.getElementById("testimonial-quote").textContent =
+            contest.testimonial.text;
+          document.getElementById("testimonial-author").textContent =
+            `- ${contest.testimonial.by}`;
+        } else {
+          document.querySelector(".testimonial-section").style.display = "none";
+        }
+
+        // Display media
+        const mediaGrid = document.getElementById("media-grid");
+        if (contest.media && contest.media.length > 0) {
+          mediaGrid.innerHTML = "";
+          contest.media.forEach((item) => {
+            mediaGrid.innerHTML += `
+            <div class="media-item">
+              <img src="${item.url}" alt="Contest media">
+              <div class="media-caption">${item.caption}</div>
+            </div>
+          `;
+          });
+        } else {
+          document.querySelector(".media-section").style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>
